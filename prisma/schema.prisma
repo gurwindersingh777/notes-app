@@ -21,18 +21,20 @@ model User {
 }
 
 model Session {
-  id        String   @id @default(cuid())
-  expiresAt DateTime
-  token     String   @unique
-  userId    String
-  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  id         String   @id @default(cuid())
+  expiresAt  DateTime
+  token      String   @unique
+  userId     String
+  user       User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  ipAddress  String?
+  userAgent  String?
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
 }
-
 model Account {
   id           String    @id @default(cuid())
   userId       String
+  password     String?
   accountId    String
   providerId   String
   accessToken  String?
@@ -48,6 +50,8 @@ model Verification {
   identifier String
   value      String
   expiresAt  DateTime
+  ipAddress  String?
+  userAgent  String?
   createdAt  DateTime @default(now())
   updatedAt  DateTime @updatedAt
 }
